@@ -1,10 +1,20 @@
+
+---
 platform: linux
 image_resource:
   type: docker-image
   source: {repository: golang}
+
 inputs:
   - name: cf-smoke-tests
   - name: pipeline
-  - name: cf-config
+
 run:
-  path: pipeline/scripts/run-smoke-tests.sh
+  path: pipeline/tasks/run-smoke-tests.sh
+
+params:
+  PCF_API_DOMAIN:
+  SMOKETEST_APP_DOMAIN:
+  PCF_SMOKETEST_USER:
+  PCF_SMOKETEST_PASSWORD:
+
