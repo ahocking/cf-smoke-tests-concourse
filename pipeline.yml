@@ -1,0 +1,32 @@
+resources:
+- name: cf-smoke-tests
+  type: git
+  source:
+    uri: ((cf_smoke_tests_git_repo))
+    branch: master
+- name: pipeline
+  type: git
+  source:
+    uri: ((cf_smoke_tests_pipeline_git_repo))
+    branch: master
+- name: every-10-minutes
+  type: time
+  source: {interval: 10m}
+jobs:
+- name: run-smoke-tests
+  plan:
+  - get: cf-smoke-tests
+  - get: pipeline
+  - get: every-10-minutes
+    trigger: true
+  - task: run-smoke-tests
+    file: pipeline/tasks/run-smoke-tests.yml
+    params:
+      PCF_API_DOMAIN: ((pcf_api_domain))
+      SMOKETEST_APP_DOMAIN: ((smoketest_app_domain))
+      PCF_SMOKETEST_USER: ((pcf_smoketest_user))
+      PCF_SMOKETEST_PASSWORD: ((pcf_smoketest_password))
+      PCF_SMOKETEST_ORG: ((pcf_smoketest_org))
+      PCF_SMOKETEST_SPACE: ((pcf_smoketest_space))
+      USE_EXISTING_ORG: ((use_existing_org))
+      USE_EXISTING_SPACE: ((use_existing_space))

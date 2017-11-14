@@ -1,0 +1,13 @@
+pcf_api_domain:
+smoketest_app_domain:
+pcf_smoketest_user:
+pcf_smoketest_password:
+
+pcf_smoketest_org: CF-SMOKE-ORG
+pcf_smoketest_space: CF-SMOKE-SPACE
+
+use_existing_org: false
+use_existing_space: false
+
+cf_smoke_tests_git_repo: https://github.com/cloudfoundry/cf-smoke-tests.git
+cf_smoke_tests_pipeline_git_repo: https://github.com/ahocking/cf-smoke-tests-concourse.git
